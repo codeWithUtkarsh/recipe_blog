@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.service.name }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.service.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.service.name }}
+    spec:
+      containers:
+        - name: {{ .Values.service.name }}
+          image: {{ .Values.service.image }}
+          ports:
+            - containerPort: {{ .Values.service.containerPort }}
+          volumeMounts:
+            - name: storage
+              mountPath: /data/db
+      volumes:
+        - name: storage
+          persistentVolumeClaim:
+            claimName: mongo-pvc
+
+---
+# App Container
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.web.name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.web.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.web.name }}
+    spec:
+      containers:
+        - name: {{ .Values.web.name }}
+          image: {{ .Values.image.name }}
+          ports:
+            - containerPort: {{ .Values.web.containerPort }}
+          env:
+            - name: MONGODB_URI
+              value: mongodb://mongo:27017/dev
+          imagePullPolicy: {{ .Values.image.pullPolicy }}

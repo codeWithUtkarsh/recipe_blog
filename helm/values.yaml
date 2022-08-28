@@ -1,0 +1,17 @@
+
+replicaCount: 1
+
+image:
+  name: 1645370/recipe_blog_api:latest
+  pullPolicy: Always
+
+service:
+  name: mongo
+  type: ClusterIP
+  port: 80
+  image: mongo:latest
+  containerPort: 27017
+
+web:
+  name: webapp
+  containerPort: 3000
