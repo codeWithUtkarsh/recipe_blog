@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.service.name }}
+  name: {{ .Values.db_service }}
 spec:
   selector:
     matchLabels:
-      app: {{ .Values.service.name }}
+      app: {{ .Values.db_service }}
   template:
     metadata:
       labels:
-        app: {{ .Values.service.name }}
+        app: {{ .Values.db_service }}
     spec:
       containers:
-        - name: {{ .Values.service.name }}
-          image: {{ .Values.service.image }}
+        - name: {{ .Values.db_service }}
+          image: {{ .Values.db_image }}
           ports:
-            - containerPort: {{ .Values.service.containerPort }}
+            - containerPort: 27017
           volumeMounts:
             - name: storage
               mountPath: /data/db
@@ -29,23 +29,23 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.web.name }}
+  name: webapp
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Values.web.name }}
+      app: {{ .Values.web_service }}
   template:
     metadata:
       labels:
-        app: {{ .Values.web.name }}
+        app: {{ .Values.web_service }}
     spec:
       containers:
-        - name: {{ .Values.web.name }}
-          image: {{ .Values.image.name }}
+        - name: {{ .Values.web_service }}
+          image: {{ .Values.image }}
           ports:
-            - containerPort: {{ .Values.web.containerPort }}
+            - containerPort: 3000
           env:
             - name: MONGODB_URI
               value: mongodb://mongo:27017/dev
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          imagePullPolicy: Always

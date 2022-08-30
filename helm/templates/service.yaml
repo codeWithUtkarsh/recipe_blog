@@ -13,23 +13,23 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.service.name }}
+  name: {{ .Values.db_service }}
 spec:
   selector:
-    app: {{ .Values.service.name }}
+    app: {{ .Values.db_service }}
   ports:
-    - port: {{ .Values.service.containerPort }}
+    - port: 80
       targetPort: 27017
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.web.name }}
+  name: {{ .Values.web_service }}
 spec:
   selector:
-    app: {{ .Values.web.name }}
+    app: {{ .Values.web_service }}
   ports:
-    - port: {{ .Values.web.containerPort }}
-      targetPort: {{ .Values.web.containerPort }}
+    - port: 3000
+      targetPort: 3000
   type: ClusterIP
 

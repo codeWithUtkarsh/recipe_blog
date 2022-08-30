@@ -1,0 +1,3 @@
+deploymentURIsLocal:
+  - "http://webapp.ms1-qa:80"
+  
