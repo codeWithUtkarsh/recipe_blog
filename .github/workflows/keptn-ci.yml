@@ -64,13 +64,13 @@ jobs:
                 },
                 "applicationMeta": $APP_COMMIT_DETAILS
                 ,"deployment": {
-                  "deploymentstrategy": "blue_green_service"
+                  "deploymentstrategy": "user_managed"
                 },
                 "message": "",
                 "project": "ms1",
                 "result": "",
                 "service": "$REPO",
-                "stage": "hardening",
+                "stage": "dev",
                 "status": ""
               },
               "contenttype": "application/json",
