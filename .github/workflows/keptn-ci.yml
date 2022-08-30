@@ -82,7 +82,7 @@ jobs:
           }
           
           echo "$(curl -X 'POST' \
-            'http://$KEPTN_API_URL/api/v1/event' \
+            "$KEPTN_API_URL/v1/event" \
             -H 'accept: application/json' \
             -H "x-token: $KEPTN_TOKEN" \
             -H 'Content-Type: application/json' \
