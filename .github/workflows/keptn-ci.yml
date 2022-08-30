@@ -73,10 +73,10 @@ jobs:
                 "stage": "hardening",
                 "status": ""
               },
-              "source": "gh",
+              "contenttype": "application/json",
+              "source": "https://github.com/keptn/keptn/cli#configuration-change",
               "specversion": "1.0",
-              "type": "sh.keptn.event.hardening.delivery.deployment",
-              "shkeptnspecversion": "0.2.1"
+              "type": "sh.keptn.event.dev.delivery.triggered"
             }
           EOF
           }
