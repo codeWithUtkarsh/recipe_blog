@@ -15,6 +15,7 @@ After all these steps you keptn control plane should be ready for delivery and t
 * `keptn add-resource --project=ms1 --service=webapp --stage=qa --resource=./jmeter/load.jmx --resourceUri=jmeter/load.yaml`
 
 
+
 ### Triggering Delivery for your service
 
 * `keptn trigger delivery --project=ms1 --service=webapp --image="1645370/recipe_blog_api:latest"`
